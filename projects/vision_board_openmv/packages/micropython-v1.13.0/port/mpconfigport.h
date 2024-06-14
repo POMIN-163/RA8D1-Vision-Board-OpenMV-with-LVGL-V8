@@ -415,6 +415,7 @@ extern const struct _mp_obj_fun_builtin_fixed_t machine_soft_reset_obj;
 extern const struct _mp_obj_module_t mp_module_ffi;
 extern const struct _mp_obj_module_t mp_module_network;
 extern const struct _mp_obj_module_t mp_module_userfunc;
+extern const struct _mp_obj_module_t mp_module_guider;
 
 //////////////////////////////////// OPENMV ////////////////////////////////////
 extern const struct _mp_obj_module_t mp_module_utime;
@@ -572,7 +573,7 @@ extern const struct _mp_obj_module_t gif_module;
 #define MODUTIME_PORT_BUILTIN_MODULES                      { MP_ROM_QSTR(MP_QSTR_utime), MP_ROM_PTR(&mp_module_time) },
 #define MODUTIME_PORT_BUILTIN_MODULE_WEAK_LINKS            { MP_ROM_QSTR(MP_QSTR_time), MP_ROM_PTR(&mp_module_time ) },
 #else
-#define SOCKET_PORT_BUILTIN_MODULES    
+#define SOCKET_PORT_BUILTIN_MODULES
 #define MODUTIME_PORT_BUILTIN_MODULE_WEAK_LINKS
 #endif /* MICROPY_PY_UTIME */
 
@@ -595,6 +596,7 @@ extern const struct _mp_obj_module_t gif_module;
 #endif
 
 #define USERFUNC_PORT_BUILTIN_MODULES { MP_ROM_QSTR(MP_QSTR_userfunc), MP_ROM_PTR(&mp_module_userfunc) },
+#define GUIDER_PORT_BUILTIN_MODULES { MP_ROM_QSTR(MP_QSTR_guider), MP_ROM_PTR(&mp_module_guider) },
 
 // extra built in names to add to the global namespace
 #define MICROPY_PORT_BUILTINS \
@@ -619,6 +621,7 @@ extern const struct _mp_obj_module_t gif_module;
     MODFFI_PORT_BUILTIN_MODULES \
     MODNETWORK_PORT_BUILTIN_MODULES \
     USERFUNC_PORT_BUILTIN_MODULES \
+    GUIDER_PORT_BUILTIN_MODULES   \
     MICROPY_USER_MODULES \
 
 #define MICROPY_PORT_BUILTIN_MODULE_WEAK_LINKS \

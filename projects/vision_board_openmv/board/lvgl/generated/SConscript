@@ -1,0 +1,16 @@
+from building import *
+import os
+
+cwd = GetCurrentDir()
+
+src = Glob("*.c")
+src += Glob("images/*.c")
+src += Glob("guider_fonts/*.c")
+
+path = [cwd]
+path += [cwd + '/guider_customer_fonts']
+path += [cwd + '/guider_fonts']
+
+group = DefineGroup('LVGL-GUI', src, depend = ['BSP_USING_LVGL'], CPPPATH = path)
+
+Return('group')

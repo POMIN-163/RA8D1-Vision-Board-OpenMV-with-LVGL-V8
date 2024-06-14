@@ -310,3 +310,75 @@ void hal_entry(void)
     omv_init_func();
 #endif
 }
+
+// #include "lv_demos.h"
+
+// void lv_user_gui_init(void)
+// {
+//     lv_demo_widgets();
+// }
+
+#include "gui_guider.h"
+#include "custom.h"
+
+lv_ui guider_ui;
+
+void lv_user_gui_init(void) {
+    lv_obj_clean(lv_scr_act());
+    setup_ui(&guider_ui);
+    custom_init(&guider_ui);
+}
+
+
+STATIC mp_obj_t lv_print(void)
+{
+    LOG_I("This is a my module's logging.");
+
+    return mp_const_none;
+}
+
+MP_DEFINE_CONST_FUN_OBJ_0(lv_print_obj, lv_print);
+
+#include "py_image.h"
+
+STATIC mp_obj_t lv_canvas_show(size_t n_args, const mp_obj_t *args)
+{
+    /* set a my buffer to display. */
+    static uint16_t img_buffer[240 * 320];
+    /* get camera stream. */
+    image_t *arg_img = py_image_cobj(args[0]);
+    /* copy pixels to my buffer. */
+    rt_memcpy(img_buffer, arg_img->pixels, (arg_img->w * arg_img->h) << 1);
+    /* change widget size and set buffer. */
+    lv_obj_set_size(guider_ui.screen_canvas_1, arg_img->w, arg_img->h);
+    lv_canvas_set_buffer(guider_ui.screen_canvas_1, img_buffer, arg_img->w, arg_img->h, LV_IMG_CF_TRUE_COLOR);
+
+    return mp_const_none;
+}
+
+MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(lv_canvas_show_obj, 1, 1, lv_canvas_show);
+
+STATIC mp_obj_t lv_result_show(mp_obj_t arg)
+{
+    lv_label_set_text(guider_ui.screen_label_1, mp_obj_str_get_str(arg));
+    return mp_const_none;
+}
+
+MP_DEFINE_CONST_FUN_OBJ_1(lv_result_show_obj, lv_result_show);
+
+
+
+STATIC const mp_rom_map_elem_t mp_module_guider_globals_table[] = {
+    { MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_guider) },
+    { MP_ROM_QSTR(MP_QSTR_lv_print), MP_ROM_PTR(&lv_print_obj) },
+    { MP_ROM_QSTR(MP_QSTR_lv_canvas_show), MP_ROM_PTR(&lv_canvas_show_obj) },
+    { MP_ROM_QSTR(MP_QSTR_lv_result_show), MP_ROM_PTR(&lv_result_show_obj) },
+};
+
+STATIC MP_DEFINE_CONST_DICT(mp_module_guider_globals, mp_module_guider_globals_table);
+
+const mp_obj_module_t mp_module_guider = {
+    .base = { &mp_type_module },
+    .globals = (mp_obj_dict_t*)&mp_module_guider_globals,
+};
+

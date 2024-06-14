@@ -1866,3 +1866,10 @@ QDEF(MP_QSTR_writebyte, (const byte*)"\xd2\x09" "writebyte")
 QDEF(MP_QSTR_crc8, (const byte*)"\xcf\x04" "crc8")
 QDEF(MP_QSTR_file_crc32, (const byte*)"\x6f\x0a" "file_crc32")
 QDEF(MP_QSTR_fileno, (const byte*)"\x82\x06" "fileno")
+
+
+QDEF(MP_QSTR_guider, (const byte*)"\xed\x06" "guider")
+QDEF(MP_QSTR_lv_print, (const byte*)"\xd1\x08" "lv_print")
+QDEF(MP_QSTR_lv_canvas_show, (const byte*)"\xb4\x0e" "lv_canvas_show")
+QDEF(MP_QSTR_lv_result_show, (const byte*)"\x35\x0e" "lv_result_show")
+

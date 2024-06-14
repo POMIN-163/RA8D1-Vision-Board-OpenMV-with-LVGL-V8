@@ -12,6 +12,7 @@ src    += Glob('lib/utils/*.c')
 src    += Glob('lib/netutils/*.c')
 src    += Glob('lib/timeutils/*.c')
 src    += Glob('lib/mp-readline/*.c')
+# src    += Glob('lib/lv_binding_micropython/gen/*.c')
 src    += Glob('drivers/bus/*.c')
 
 modules_src  = Glob('port/*.c')
@@ -30,6 +31,7 @@ path   += [cwd + '/py']
 path   += [cwd + '/port']
 path   += [cwd + '/lib/utils']
 path   += [cwd + '/lib/libm_dbl']
+path   += [cwd + '/lib/lv_binding_micropython/driver/include']
 path   += [cwd + '/port/modules']
 path   += [cwd + '/port/modules/machine']
 path   += [cwd + '/ports/renesas']

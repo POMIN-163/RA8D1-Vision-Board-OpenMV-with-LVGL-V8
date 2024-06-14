@@ -22,7 +22,7 @@ static int height = 0;
 static enum { LCD_NONE, LCD_SHIELD } type = LCD_NONE;
 static bool backlight_init = false;
 
-static ovmhal_lcd_t lcddev;
+ovmhal_lcd_t lcddev;
 
 static mp_obj_t py_lcd_deinit(void)
 {

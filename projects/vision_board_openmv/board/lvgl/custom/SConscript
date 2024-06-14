@@ -1,0 +1,12 @@
+from building import *
+import os
+
+cwd = GetCurrentDir()
+
+src = Glob("*.c")
+
+path = [cwd]
+
+group = DefineGroup('LVGL-GUI', src, depend = ['BSP_USING_LVGL'], CPPPATH = path)
+
+Return('group')

@@ -4,6 +4,7 @@ import rtconfig
 import platform
 import subprocess
 import uuid
+import scons_compiledb
 
 if os.path.exists('rt-thread'):
     RTT_ROOT = os.path.normpath(os.getcwd() + '/rt-thread')
@@ -29,6 +30,8 @@ env = Environment(tools = ['mingw'],
     AR = rtconfig.AR, ARFLAGS = '-rc',
     LINK = rtconfig.LINK, LINKFLAGS = rtconfig.LFLAGS)
 env.PrependENVPath('PATH', rtconfig.EXEC_PATH)
+scons_compiledb.enable(env)
+env.CompileDb()
 
 if rtconfig.PLATFORM in ['iccarm']:
     env.Replace(CCCOM = ['$CC $CFLAGS $CPPFLAGS $_CPPDEFFLAGS $_CPPINCFLAGS -o $TARGET $SOURCES'])
